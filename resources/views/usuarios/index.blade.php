@@ -19,8 +19,8 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Email</th>
-        <th>Admin</th>
         <th>Apagar</th>
+        <th>Editar</th>
     </tr>
 
 
@@ -31,6 +31,7 @@
         <td>{{ $usuario->email }}</td>
         {{-- <td>{{ $usuario->admin ? 'Sim' : 'Não' }}</td> --}}
         <td><a href="{{ route('usuarios.apagar', $usuario->id) }}">Apagar</a></td>
+        <td><a href="{{ route('usuarios.editar', $usuario->id) }}">Editar</a></td>
     </tr>
     @endforeach
 

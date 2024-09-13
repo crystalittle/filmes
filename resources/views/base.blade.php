@@ -12,8 +12,7 @@
         <p>{{session('erro')}}</p>
         @endif
         </div>
-
-        <h1>@yield('titulo')</h1>
+        
         <hr>
         <a href="{{ route('index') }}">Inicial</a>
         |

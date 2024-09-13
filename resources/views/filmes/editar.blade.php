@@ -22,6 +22,8 @@ placeholder="Sinopse"></p>
 placeholder="Ano"></p>
  <p><input value="{{ old('categoria', $filme->categoria ?? '') }}" type="text" name="categoria"
 placeholder="Categoria"></p>
+<p><input value="{{ old('link', $filme->link ?? '') }}" type="text" name="link"
+placeholder="Link"></p>
  <p><input type="submit" value="Editar"></p>
 </form>
 @endsection
