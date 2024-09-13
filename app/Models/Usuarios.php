@@ -38,4 +38,8 @@ function setRememberToken($value){
 function getRememberTokenName(){
     
  }
+
+ function getAuthPasswordName(){
+    return 'password';
+ }
 }
