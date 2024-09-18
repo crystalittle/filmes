@@ -1,37 +1,77 @@
-{{--resources/views/Filmes/base.blade.php--}}
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@yield('titulo')</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-    
-        <div>
-         <h1>@yield('titulo')</h1>
-        @if(session('erro'))
-        <p>Erro!</p>
-        <p>{{session('erro')}}</p>
-        @endif
+        <!-- Barra de navegação -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{route('index')}}">Sistema Filmes</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('index')}}">Inicial</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('filmes')}}">Filmes</a>
+                        </li>
+                        @if (Auth::user() && Auth::user()->admin)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('usuarios')}}">Usuários</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('usuarios.cadastrar')}}">Cadastre-se</a>
+                            </li>
+                        @endif
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (Auth::user())
+                            <li class="nav-item">
+                                <span class="navbar-text">Olá, <strong>{{ Auth::user()->name }}</strong>.</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('logout')}}">Logout</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('login')}}">Login</a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h1>@yield('titulo')</h1>
+
+                    <!-- Exibição de mensagens de erro -->
+                    @if(session('erro'))
+                        <div class="alert alert-danger">
+                            <strong>Erro!</strong> {{ session('erro') }}
+                        </div>
+                    @endif
+
+                    <!-- Conteúdo da página -->
+                    @yield('conteudo')
+                </div>
+            </div>
         </div>
-        
-        <hr>
-        <a href="{{ route('index') }}">Inicial</a>
-        |
-        <a href="{{ route('filmes') }}">Filmes</a>
-        | 
-        @if (Auth::user() && Auth::user()['admin'])
-         <a href="{{ route('usuarios') }}">Usuários</a>
-        |
-        @else
-        | Você não está autenticado!
-        @endif
-        |
-        @if(Auth::user())
-        Olá <strong>{{ Auth::user()['nome'] }}</strong>
-        <a href="{{ route('logout') }}">Logout</a>
-        @else
-        <a href="{{ route('login') }}">Login</a>
-        @endif
-        <hr>
-        @yield('conteudo')
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
